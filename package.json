@@ -1,0 +1,87 @@
+{
+	"name": "thinker",
+	"version": "0.1.0",
+	"description": "Machine learning library",
+	"keywords": [
+		"lib"
+	],
+	"author": "Bastien GUIHARD",
+	"license": "MIT",
+	"main": "dist/lib/index.js",
+	"module": "dist/lib/index.js",
+	"types": "dist/types/index.d.ts",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/guihardbastien/REPO.git"
+	},
+	"bugs": {
+		"url": "https://github.com/guihardbastien/REPO/issues"
+	},
+	"homepage": "https://github.com/guihardbastien/REPO#readme",
+	"engines": {
+		"node": ">=8.9.0"
+	},
+	"scripts": {
+		"prebuild": "npx rimraf dist",
+		"build": "npx tsc --module commonjs",
+		"build:watch": "npx tsc -w --module commonjs",
+		"test": "npx jest --coverage",
+		"test:watch": "npx jest --coverage --watch",
+		"test:prod": "npm run lint && npm run test -- --no-cache",
+		"lint": "npx tslint --project tsconfig.json -t codeFrame 'lib/**/*.ts' 'test/**/*.ts'",
+		"docs": "npx typedoc --out docs --target es6 --theme minimal --mode file lib",
+		"make-badges": "node_modules/.bin/jest-badges-readme"
+	},
+	"dependencies": {
+		"@types/node": "^11.13.20",
+		"console-scatter-plot": "^1.0.1"
+	},
+	"devDependencies": {
+		"@olavoparno/jest-badges-readme": "^1.4.0",
+		"@types/chai": "^4.2.3",
+		"@types/jest": "^23.3.14",
+		"@types/sinon": "^7.0.13",
+		"chai": "4.x",
+		"jest": "^25.5.4",
+		"jest-config": "^25.5.4",
+		"lodash.camelcase": "^4.3.0",
+		"npm-audit-ci": "^1.2.1",
+		"rimraf": "^2.7.1",
+		"sinon": "^7.5.0",
+		"ts-jest": "^25.4.0",
+		"ts-node": "7.x",
+		"tsc-watch": "1.x",
+		"tslint": "^5.20.0",
+		"tslint-config-airbnb": "^5.11.2",
+		"tslint-language-service": "^0.9.9",
+		"typedoc": "^0.15.0",
+		"typescript": "^3.6.3"
+	},
+	"jest": {
+		"transform": {
+			".(ts|tsx)": "ts-jest"
+		},
+		"testEnvironment": "node",
+		"testRegex": "(/tests/.*|\\.(test|spec|func))\\.(ts|tsx|js)$",
+		"moduleFileExtensions": [
+			"ts",
+			"tsx",
+			"js"
+		],
+		"coveragePathIgnorePatterns": [
+			"/node_modules/",
+			"/tests/"
+		],
+		"coverageThreshold": {
+			"global": {
+				"branches": 85,
+				"functions": 85,
+				"lines": 85,
+				"statements": 85
+			}
+		},
+		"collectCoverageFrom": [
+			"lib/**/*.{js,ts}"
+		]
+	}
+}
