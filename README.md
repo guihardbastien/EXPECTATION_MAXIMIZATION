@@ -23,6 +23,9 @@ Afterwards, we compute new parameters for each distribution given the confidence
 We run the EM algorithm until we hit a candidate response given a threshold.
 
 ### Maths 
+!(equation)[http://www.plantuml.com/plantuml/svg/SoWkIImgoKqioU1AqoZHjDL8Z3VGr3TIq5OeBisDryYpDTICoyzFZCzBpY_MqCWho2pHrFVHr4QML4YApujHACxCGyXpEQJcfO0D1G00]
+
+
 ### Pseudo code 
 
 ## Overview
