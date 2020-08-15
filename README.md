@@ -1,8 +1,31 @@
-# THINKER
+# SHERLOCK
 ## Description
-TBA
+
+Sherlock is an expectation maximization (EM) library it uses gaussian mixture models.
+
+This library allows data clustering of n-dimensional datasets given the amount of clusters wanted.
+
+### How does it work ?
+
+In short, we admit that each data cluster is distributed over a gaussian distribution. 
+Our EM model will then infer the mean and covariance of each distribution.
+
+How do we do that ? 
+
+First, let's say, given a dataset we want to infer parameters for k clusters.
+
+For starters, we initialize k gaussian distributions with random parameters (mean and covariance).
+
+Then we estimate the probability of each data point of belonging to this or that distribution.
+
+Afterwards, we compute new parameters for each distribution given the confidence of each point belonging to a cluster.
+
+We run the EM algorithm until we hit a candidate response given a threshold.
+
+### Maths 
+### Pseudo code 
+
 ## Overview
-TBA
 ### Directory structure
 ```bash
 TBA
@@ -15,7 +38,8 @@ TBA
 __Example:__
 
 ```typescript
-TBA
+import Sherlock from '@guihardbastien/sherlock';
+
 ```
 ### Features
 TBA
