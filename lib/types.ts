@@ -5,15 +5,41 @@ export interface IGaussianParams{
     /**
      * Mean
      */
-    mu:number;
+    mu:number[];
 
     /**
-     * Standard deviation | Variance
+     * Standard deviation | Covariance matrix
      */
-    sigma: number;
+    sigma: number[][];
 
     /**
      * Dimension
      */
-    k: number;
+    vectorSpaceDim: number;
+
+    /**
+     * weight
+     */
+    pi: number;
+
+    /**
+     * distribution name
+     */
+    label?: string;
+}
+
+/**
+ * Interface describing a dataset
+ */
+export interface IDataset{
+
+    /**
+     * Points
+     */
+    points: number[][];
+
+    /**
+     * label
+     */
+    label?: string;
 }

@@ -1,4 +1,5 @@
 import { IGaussianParams } from '../types';
+import { IGaussianParams } from '../../types';
 
 /**
  * Multivariate gaussian distribution
@@ -15,13 +16,26 @@ export default class MultivariateGaussian {
      */
     private _mu:number;
 
-    constructor(parameters: IGaussianParams, init: boolean = false) {
+    /**
+     * Distribution name
+     */
+    private _label: string;
+
+    constructor(parameters: IGaussianParams) {
         const {
                 mu,
                 sigma,
             } = parameters;
         this._mu = mu;
         this._sigma = sigma;
+    }
+
+    /**
+     * Update parameters
+     * ! Mutates state !
+     */
+    update(parameters: IGaussianParams) {
+        return;
     }
 
     /**
