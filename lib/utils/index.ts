@@ -69,3 +69,16 @@ export function checkMatrix(matrix: number[][]) {
     });
     return matrix;
 }
+
+
+/**
+ * Sum vectors in matrix
+ */
+export function sumMatrix(matrix: number[][]){
+    matrix.reduce((acc:number[], vec: number[]) =>{
+        return vec.map((num:number, i:number) => {
+        return num + acc[i];
+        } )
+    } )
+
+}

@@ -7,7 +7,15 @@ import { zeroMatrix } from '../utils';
  * Maximization function
  * update estimates of parameters
  */
-export function maximization() {
+export function maximization(clusters: IGaussianParams[], dataset: IDataset) {
+    const matSize = dataset.points.length();
+    const vectorSpaceDim = dataset.points[0].length;
+    clusters.forEach((cluster: IGaussianParams)=>{
+        const newCovarianceMatrix = zeroMatrix(vectorSpaceDim, vectorSpaceDim);
+        const n = cluster.gamma.reduce((acc:number, num:number) => acc + num);
+        cluster.pi = n/matSize;
+        //todo mu
+    })
     return;
 }
 
@@ -28,7 +36,7 @@ export function expectation(clusters: IGaussianParams[], dataset: IDataset) {
     clusters.forEach((cluster) => {
         cluster.gamma.map((g:number, index:number) => {return g / cluster.totals[index]; });
     });
-    return;
+    return clusters;
 }
 
 /**
