@@ -1,6 +1,7 @@
 import * as EmUtils from '../utils/em_utils';
 import MultivariateGaussian from './multivariate_gaussian';
-import { IDataset } from '../../types';
+import { IDataset, IEmOptions } from '../../types';
+import { maximization } from '../../helpers/expectation_maximization_helpers';
 
 /**
  * Expectation maximization using a gaussian mixture model
@@ -48,15 +49,28 @@ export default class ExpMax {
     /**
      * Debug mode
      */
-    private _debug: boolean;
+    private _debug: boolean; i;
 
-    constructor(dataset: IDataset, clusterQt: number = 2, threshold: number = 2e-16) {
-        // TODO Load existing model
-        // TODO Debug mode
+    /**
+     * Max epochs
+     */
+    private _maxEpochs: number;
+
+    /**
+     * Threshold
+     */
+    private _threshold:number;
+
+    constructor(dataset: IDataset, clusterQt: number = 2, options: IEmOptions) {
+        const {
+            threshold = 2e-16,
+            maxEpochs = 1000,
+        } = options;
+
+        this._maxEpochs = maxEpochs;
+        this._threshold = threshold;
         this._dataset = dataset;
         this._qt = clusterQt;
-        this._debug = debug;
-        this._threshold = threshold;
         this._clusters = instanciateClusters(clusterQt, dataset.points[0].length);
         this.train();
     }
@@ -67,6 +81,7 @@ export default class ExpMax {
      */
     update(newDataset:any) {
         this._dataset = newDataset;
+        // TODO checkmatrix here
         this.train();
         return this._clusters;
     }
@@ -75,6 +90,10 @@ export default class ExpMax {
      * Training model
      */
     train() {
+        for (let i = 0, i < this._maxEpochs ; i += 1) {
+            const clusters = maximization() ;
+            const;
+        }
         return this._clusters;
     }
 

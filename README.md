@@ -55,6 +55,10 @@ TBA
 - `docs`: Generate the docs directory.
 - `lint`: Runs linter on the whole project.
 
+
+## Ressources
+* https://towardsdatascience.com/gaussian-mixture-models-explained-6986aaf5a95
+
 ## License
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)

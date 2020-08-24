@@ -3,7 +3,7 @@
  */
 export interface IGaussianParams{
     /**
-     * Mean
+     * Mean | centroid
      */
     mu:number[];
 
@@ -18,7 +18,7 @@ export interface IGaussianParams{
     vectorSpaceDim: number;
 
     /**
-     * weight
+     * weight | mixing probability
      */
     pi: number;
 
@@ -26,6 +26,16 @@ export interface IGaussianParams{
      * distribution name
      */
     label?: string;
+
+    /**
+     * gamma
+     */
+    gamma?: number[];
+
+    /**
+     * total
+     */
+    totals?: number[];
 }
 
 /**
@@ -42,4 +52,20 @@ export interface IDataset{
      * label
      */
     label?: string;
+}
+
+/**
+ * Em options
+ */
+export interface IEmOptions{
+    /**
+     * epsilon threshold
+     */
+    epsilon?:number;
+
+    /**
+     * max epochs
+     */
+    maxEpochs?:number;
+
 }

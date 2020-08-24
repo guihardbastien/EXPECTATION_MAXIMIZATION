@@ -17,6 +17,21 @@ export default class MultivariateGaussian {
     private _mu:number;
 
     /**
+     * mixing probability
+     */
+    pi: number;
+
+    /**
+     * gamma
+     */
+    gamma: number;
+
+    /**
+     * totals
+     */
+    totals: number[];
+
+    /**
      * Distribution name
      */
     private _label: string;
