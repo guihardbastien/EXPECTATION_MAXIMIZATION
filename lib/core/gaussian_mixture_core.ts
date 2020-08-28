@@ -1,20 +1,22 @@
-import {IClusterModel} from "../types";
+import { IClusterModel } from '../types';
 
 /**
- * Probability density function 
+ * Probability density function
  * @param cluster: IClusterModel
  * @return tba
  */
-export function density(cluster: IClusterModel){
+export function density(cluster: IClusterModel) {
     return;
 }
 
 /**
- * Probability of a point 
+ * Probability of a point
  * @param cluster: IClusterModel
  * @param point: number[]
  * @return tba
  */
-export function probability(cluster: IClusterModel, point: number[]){
+export function probability(cluster: IClusterModel, point: number[]) {
     return;
 }
+
+

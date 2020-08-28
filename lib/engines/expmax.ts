@@ -1,4 +1,7 @@
-import {IClusterModel, IDataset, IEmOptions} from "../types";
+import { IClusterModel, IDataset, IEmOptions } from '../types';
+import * as MathUtils from '../utils/math';
+import { MATRIX_SIZE_ERROR } from '../errors';
+import { createRandomClusters } from '../core/expmax_core';
 
 /**
  * Expectation maximization using a gaussian mixture model
@@ -45,6 +48,11 @@ export default class ExpMax {
      */
     private _threshold:number;
 
+    /**
+     * Vector space dimension
+     */
+    private _vectorSpaceDim: number;
+
     constructor(dataset: IDataset, clusterQt: number = 2, options: IEmOptions) {
         const {
             threshold = 2e-16,
@@ -55,39 +63,39 @@ export default class ExpMax {
         this._threshold = threshold;
         this._dataset = dataset;
         this._qt = clusterQt;
-        this._clusters = instanciateClusters(clusterQt, dataset.points[0].length);
-        this.train();
+        this._vectorSpaceDim = dataset.points[0].length;
+        this._clusters = createRandomClusters(clusterQt, this._vectorSpaceDim);
     }
 
     /**
-     * update dataset
-     * Careful: mutates state
+     * Update dataset
+     * Mutates internal state
+     * @param newDataset: IDataset
+     * @returns IClusterModel[] | error
      */
-    update(newDataset:any) {
-        this._dataset = newDataset;
-        // TODO checkmatrix here
-        this.train();
-        return this._clusters;
-    }
-
-    /**
-     * Training model
-     */
-    train() {
-        for (let i = 0, i < this._maxEpochs ; i += 1) {
-            const clusters = maximization() ;
-            const;
+    update(newDataset:IDataset) {
+        if (MathUtils.checkMatrixSize(newDataset, this._dataset[0].length)) {
+            this._dataset = newDataset;
+            this.train();
+            return this._clusters;
         }
-        return this._clusters;
+        MATRIX_SIZE_ERROR;
     }
 
     /**
-     * Predicts output for a given point
-     * @returns clusterInfo: {[key:string]:any}
+     * Em Algorithm
+     * @returns IClusterModel[]
      */
-    predict(point: number[]) {
-        const cluster;
-        return cluster;
+    train(): IClusterModel[] {
+        return this._clusters;
+    }    
+    
+    /**
+     * Classify point 
+     * @param point: number[]
+     * @returns label:string
+     */
+    classify():string{
+        return;
     }
-
 }

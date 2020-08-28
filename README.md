@@ -1,4 +1,4 @@
-# SHERLOCK
+# Expectation maximization
 ## Description
 
 Sherlock is an expectation maximization (EM) library it uses gaussian mixture models.
