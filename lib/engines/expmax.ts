@@ -1,7 +1,4 @@
-import * as EmUtils from '../utils/em_utils';
-import MultivariateGaussian from './multivariate_gaussian';
-import { IDataset, IEmOptions } from '../../types';
-import { maximization } from '../../helpers/expectation_maximization_helpers';
+import {IClusterModel, IDataset, IEmOptions} from "../types";
 
 /**
  * Expectation maximization using a gaussian mixture model
@@ -11,11 +8,8 @@ import { maximization } from '../../helpers/expectation_maximization_helpers';
  * For instance:
  *
  * ```ts
- * const model = new ExpMax(data, qt, thrshold);
- * model.train;
- * const prediction = model.predict(dataPoint);
- * console.log(prediction);
- *```
+ * tba
+ * ```
  *
  * This program will output the likelihood of your data point belonging to each
  * distribution.
@@ -29,12 +23,7 @@ export default class ExpMax {
     /**
      * Clusters
      */
-    private _clusters: MultivariateGaussian[];
-
-    /**
-     * Threshold before end of loop
-     */
-    private _threshold: number;
+    private _clusters: IClusterModel[];
 
     /**
      * Data
@@ -45,11 +34,6 @@ export default class ExpMax {
      * Quantity of clusters
      */
     private _qt:number;
-
-    /**
-     * Debug mode
-     */
-    private _debug: boolean; i;
 
     /**
      * Max epochs

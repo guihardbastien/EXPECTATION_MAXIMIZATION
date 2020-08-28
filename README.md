@@ -58,6 +58,7 @@ TBA
 
 ## Ressources
 * https://towardsdatascience.com/gaussian-mixture-models-explained-6986aaf5a95
+* https://perso.telecom-paristech.fr/bonald/documents/gmm.pdf
 
 ## License
 

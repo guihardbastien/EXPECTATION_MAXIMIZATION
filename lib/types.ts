@@ -1,8 +1,8 @@
 /**
- * Parameters for gaussian distribution
+ * Gaussian distribution params
  */
-export interface IGaussianParams{
-    /**
+export interface IClusterModel{
+ /**
      * Mean | centroid
      */
     mu:number[];
@@ -23,49 +23,41 @@ export interface IGaussianParams{
     pi: number;
 
     /**
-     * distribution name
+     * distribution label
      */
     label?: string;
 
     /**
-     * gamma
+     * Gammas | probability of z given x
      */
     gamma?: number[];
 
-    /**
-     * total
-     */
-    totals?: number[];
 }
 
 /**
- * Interface describing a dataset
+ * Dataset types
  */
 export interface IDataset{
-
     /**
      * Points
      */
     points: number[][];
 
     /**
-     * label
+     * Label
      */
     label?: string;
+
 }
 
-/**
- * Em options
- */
 export interface IEmOptions{
     /**
-     * epsilon threshold
+     * Threshold
      */
     epsilon?:number;
 
     /**
-     * max epochs
+     * Maximum iteration
      */
-    maxEpochs?:number;
-
+    maxEpochs?: number;
 }
