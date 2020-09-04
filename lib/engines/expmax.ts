@@ -1,7 +1,7 @@
 import { IClusterModel, IDataset, IEmOptions } from '../types';
 import * as MathUtils from '../utils/math';
 import { MATRIX_SIZE_ERROR } from '../errors';
-import { createRandomClusters } from '../core/expmax_core';
+import { createRandomClusters, maximization } from '../core/expmax_core';
 
 /**
  * Expectation maximization using a gaussian mixture model
@@ -53,10 +53,11 @@ export default class ExpMax {
      */
     private _vectorSpaceDim: number;
 
-    constructor(dataset: IDataset, clusterQt: number = 2, options: IEmOptions) {
+    constructor(dataset: IDataset, options: IEmOptions) {
         const {
             threshold = 2e-16,
             maxEpochs = 1000,
+            clusterQt = 2,
         } = options;
 
         this._maxEpochs = maxEpochs;
@@ -64,7 +65,7 @@ export default class ExpMax {
         this._dataset = dataset;
         this._qt = clusterQt;
         this._vectorSpaceDim = dataset.points[0].length;
-        this._clusters = createRandomClusters(clusterQt, this._vectorSpaceDim);
+        this._clusters = createRandomClusters(dataset, clusterQt, this._vectorSpaceDim);
     }
 
     /**
@@ -74,7 +75,7 @@ export default class ExpMax {
      * @returns IClusterModel[] | error
      */
     update(newDataset:IDataset) {
-        if (MathUtils.checkMatrixSize(newDataset, this._dataset[0].length)) {
+        if (MathUtils.checkMatrixSize(newDataset.points, this._dataset.points[0].length)) {
             this._dataset = newDataset;
             this.train();
             return this._clusters;
@@ -87,15 +88,19 @@ export default class ExpMax {
      * @returns IClusterModel[]
      */
     train(): IClusterModel[] {
-        return this._clusters;
-    }    
-    
+        for (var i = 0, len = this._maxEpochs; i < len; i++) {
+            const newClusters = maximization(this._clusters, this._dataset);
+            const 
+        }
+        return;
+    }
+
     /**
-     * Classify point 
+     * Classify point
      * @param point: number[]
-     * @returns label:string
+     * @returns IClusterModel
      */
-    classify():string{
+    classify(point: number[]):IClusterModel {
         return;
     }
 }

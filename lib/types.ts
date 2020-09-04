@@ -5,32 +5,32 @@ export interface IClusterModel{
  /**
      * Mean | centroid
      */
-    mu:number[];
+    readonly mu:number[];
 
     /**
      * Standard deviation | Covariance matrix
      */
-    sigma: number[][];
+    readonly sigma: number[][];
 
     /**
      * Dimension
      */
-    vectorSpaceDim: number;
+    readonly vectorSpaceDim: number;
 
     /**
      * weight | mixing probability
      */
-    pi: number;
+    readonly pi: number;
 
     /**
      * distribution label
      */
-    label?: string;
+    readonly label?: string;
 
     /**
      * Gammas | probability of z given x
      */
-    gamma?: number[];
+    readonly gamma: number[];
 
 }
 
@@ -50,14 +50,58 @@ export interface IDataset{
 
 }
 
-export interface IEmOptions{
+/**
+ * Fixme for later FP porting
+ */
+export interface IExpmaxState{
+    /**
+     * Dataset
+     */
+    readonly dataset: IDataset;
+
+    /**
+     * Number of clusters we want
+     */
+    readonly clusterQt: number;
+
+    /**
+     * Vector space dimension
+     */
+    readonly vectorSpaceDim: number;
+
+    /**
+     * Clusters
+     */
+    readonly clusters?: IClusterModel[];
+
     /**
      * Threshold
      */
-    epsilon?:number;
+    readonly epsilon?:number;
 
     /**
      * Maximum iteration
      */
-    maxEpochs?: number;
+    readonly maxEpochs?: number;
+}
+
+/**
+ * Class options
+ */
+export interface IEmOptions{
+
+    /**
+     * Threshold
+     */
+    threshold: number;
+
+    /**
+     * Maximum iteration
+     */
+    maxEpochs: number;
+
+    /**
+     * Amount of clusters we want to create
+     */
+    clusterQt: number;
 }
