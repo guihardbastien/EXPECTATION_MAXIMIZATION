@@ -1,6 +1,14 @@
-import { IClusterModel, IDataset } from '../types';
+import { IClusterModel, IDataset, IEmOptions } from '../types';
 import { probability } from './gaussian_mixture_core';
-import { randomVector, randomMatrix, sumMatrix, multiplyMatrices, transpose, getMuNumerators } from '../utils/math';
+import {
+    randomVector,
+    randomMatrix,
+    sumMatrix,
+    multiplyMatrices,
+    transpose,
+    getMuNumerators,
+    infinityNorm,
+    subMatrix } from '../utils/math';
 
 /**
  * Maximization step
@@ -29,7 +37,8 @@ export function maximization(clusters: IClusterModel[], data: IDataset):ICluster
             }
 
         });
-        return{ pi, mu, sigma, vectorSpaceDim, label, gamma };
+        const newCluster: IClusterModel = { pi, mu, sigma, vectorSpaceDim, label, gamma };
+        return newCluster;
     });
     return updatedClusters;
 }
@@ -39,9 +48,9 @@ export function maximization(clusters: IClusterModel[], data: IDataset):ICluster
  * Assigns points to its most likely cluster
  * @param clusters: IClusterModel[]
  * @param data: IDataset
- * @returns number[][]
+ * @returns IClusterModel[]
  */
-export function expectation(clusters: IClusterModel[], data: IDataset): number[][] {
+export function expectation(clusters: IClusterModel[], data: IDataset): IClusterModel[] {
     const gammaZnk = data.points.map((point: number[], index: number) => {
         let denominator = 0;
         const numerators = clusters.map((cluster:IClusterModel, j:number) => {
@@ -61,7 +70,13 @@ export function expectation(clusters: IClusterModel[], data: IDataset): number[]
         }
         return gamma;
     });
-    return gammaZnk;
+    const updatedClusters = clusters.map((c: IClusterModel, index:number) => {
+        const { mu, sigma, vectorSpaceDim, pi } = c;
+        const gamma = gammaZnk.map((g:number[]) => g[index]);
+        const newCluster: IClusterModel = { mu, sigma, vectorSpaceDim, pi, gamma };
+        return newCluster;
+    });
+    return updatedClusters;
 }
 
 /**
@@ -85,9 +100,26 @@ export function createRandomClusters(data:IDataset, qt: number, dim: number): IC
 
 /**
  * Training model
- * @param
- * @param
+ * @param maxEpoch:number
+ * @param clusters: IClusterModel
+ * @param data : IDataset
+ * @param threshold: number
  * @returns
  */
-export function train(): IClusterModel[]{
+export function train(clusters: IClusterModel[], data: IDataset, opts:IEmOptions): IClusterModel[] {
+    const { threshold, maxEpochs } = opts;
+    let tempClusters:IClusterModel[] = clusters;
+    for (let i = 0;  i < maxEpochs ; i += 1) {
+        const maximizedClusters = maximization(tempClusters, data);
+        const expectations = expectation(maximizedClusters, data);
+        const oldGammas = tempClusters.map(cluster => cluster.gamma);
+        const newGammas = expectations.map(cluster => cluster.gamma);
+        tempClusters = expectations;
+        const delta = infinityNorm(subMatrix(newGammas, oldGammas));
+        if (delta <= threshold) {
+            break;
+        }
+
+    }
+    return tempClusters;
 }

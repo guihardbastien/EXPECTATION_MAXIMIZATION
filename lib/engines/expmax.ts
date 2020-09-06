@@ -1,7 +1,7 @@
 import { IClusterModel, IDataset, IEmOptions } from '../types';
 import * as MathUtils from '../utils/math';
 import { MATRIX_SIZE_ERROR } from '../errors';
-import { createRandomClusters, maximization } from '../core/expmax_core';
+import * as Core from '../core/expmax_core';
 
 /**
  * Expectation maximization using a gaussian mixture model
@@ -34,24 +34,14 @@ export default class ExpMax {
     private _dataset: IDataset;
 
     /**
-     * Quantity of clusters
-     */
-    private _qt:number;
-
-    /**
-     * Max epochs
-     */
-    private _maxEpochs: number;
-
-    /**
-     * Threshold
-     */
-    private _threshold:number;
-
-    /**
      * Vector space dimension
      */
     private _vectorSpaceDim: number;
+
+    /**
+     * Options
+     */
+    private _opts: IEmOptions;
 
     constructor(dataset: IDataset, options: IEmOptions) {
         const {
@@ -60,12 +50,10 @@ export default class ExpMax {
             clusterQt = 2,
         } = options;
 
-        this._maxEpochs = maxEpochs;
-        this._threshold = threshold;
+        this._opts = { threshold, maxEpochs, clusterQt };
         this._dataset = dataset;
-        this._qt = clusterQt;
         this._vectorSpaceDim = dataset.points[0].length;
-        this._clusters = createRandomClusters(dataset, clusterQt, this._vectorSpaceDim);
+        this._clusters = Core.createRandomClusters(dataset, clusterQt, this._vectorSpaceDim);
     }
 
     /**
@@ -88,19 +76,8 @@ export default class ExpMax {
      * @returns IClusterModel[]
      */
     train(): IClusterModel[] {
-        for (var i = 0, len = this._maxEpochs; i < len; i++) {
-            const newClusters = maximization(this._clusters, this._dataset);
-            const 
-        }
-        return;
+        this._clusters = Core.train(this._clusters, this._dataset, this._opts);
+        return this._clusters;
     }
 
-    /**
-     * Classify point
-     * @param point: number[]
-     * @returns IClusterModel
-     */
-    classify(point: number[]):IClusterModel {
-        return;
-    }
 }

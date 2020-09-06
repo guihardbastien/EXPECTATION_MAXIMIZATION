@@ -1,4 +1,5 @@
 import { IClusterModel } from '../types';
+import { inverseMatrix, matrixDeterminant } from '../utils/math';
 
 /**
  * Probability density function
@@ -7,9 +8,21 @@ import { IClusterModel } from '../types';
  * @return number
  */
 export function density(cluster: IClusterModel, point:number[]): number {
-    const delta = point.map((coord: number, index; number)=> coord - cluster.mu[index]);
-
-    return;
+    const delta = point.map((coord: number, index: number) => {
+        return coord - cluster.mu[index];
+    });
+    const invSigma = inverseMatrix(cluster.sigma);
+    const leftPart = 1 / (Math.pow(Math.sqrt(2 * Math.PI), point.length)
+            * Math.sqrt(matrixDeterminant(cluster.sigma)));
+    let rightPart =  0;
+    for (let i = 0; i < cluster.vectorSpaceDim ; i += 1) {
+        let sum = 0;
+        for (let j = 0; j < cluster.vectorSpaceDim; j += 1) {
+            sum += invSigma[i][j] * delta[j];
+        }
+        rightPart += delta[i] * sum;
+    }
+    return leftPart * Math.exp(rightPart / -2);
 }
 
 /**
