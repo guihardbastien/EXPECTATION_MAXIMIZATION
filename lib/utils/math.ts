@@ -1,6 +1,24 @@
 import { MATRIX_SIZE_ERROR } from '../errors';
 
 /**
+ * Creates a zero matrix
+ * @param vectorDim: number
+ * @param matDim: number
+ * @returns number[][]
+ */
+export function zeroMatrix(vectorDim: number, matDim: number): number[][]{
+    const zeroMat: number[][] = [];
+    for (var i = 0; i < matDim ; i+=1) {
+        zeroMat.push([]);
+        for (var j = 0 ; j < vectorDim ; j+=1) {
+            zeroMat[i].push(0);
+            
+        }
+    }
+    return zeroMat;
+}
+
+/**
  * Checks if a matrix has the correct dim
  * @param matrix: number[][]
  * @param vectorSpaceDim: number
@@ -142,7 +160,6 @@ export function subMatrix(mat1: number[][], mat2:number[][]):number[][] {
  * @returns matrix^(-1): number[][]
  */
 export function inverseMatrix(matrix: number[][]):number[][] {
-
     const s = [matrix.length, matrix[0].length];
     const abs = Math.abs;
     const m = s[0];
@@ -150,7 +167,7 @@ export function inverseMatrix(matrix: number[][]):number[][] {
     const a = matrix;
     let ai;
     let aj;
-    const id = identity(m);
+    const id = identityMat(m);
     let idI;
     let idJ;
     let i;
@@ -167,11 +184,12 @@ export function inverseMatrix(matrix: number[][]):number[][] {
                 v0 = k;
             }
         }
-        aj = a[i0]; a[i0] = a[j];
+        aj = a[i0]; 
+        a[i0] = a[j];
         a[j] = aj;
         idJ = id[i0];
         id[i0] = id[j];
-        id[j] = idj;
+        id[j] = idJ;
         x = aj[j];
         for (k = j; k !== n; k += 1) {
             aj[k] /= x;
@@ -206,7 +224,7 @@ export function inverseMatrix(matrix: number[][]):number[][] {
  * @returns id: number[][]
  */
 export function identityMat(dim:number): number[][] {
-    const id = [];
+    const id:number[][] = [];
     for (let i = 0; i < dim; i += 1) {
         id.push([]);
         for (let j = 0; j < dim; j += 1) {

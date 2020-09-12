@@ -8,7 +8,8 @@ import {
     transpose,
     getMuNumerators,
     infinityNorm,
-    subMatrix } from '../utils/math';
+    subMatrix, 
+    zeroMatrix} from '../utils/math';
 
 /**
  * Maximization step
@@ -24,7 +25,7 @@ export function maximization(clusters: IClusterModel[], data: IDataset):ICluster
         const sumGammas = gamma.reduce((acc: number, val:number) => acc + val);
         const pi = sumGammas / n;
         const mu = getMuNumerators(gamma, data.points).map((val:number) => val / sumGammas);
-        const sigma: number[][] = [];
+        const sigma: number[][] = zeroMatrix(vectorSpaceDim,vectorSpaceDim);
         data.points.forEach((point: number[], j:number) => {
             const diff: number[] = point.map((val:number, k:number) => val - mu[k]);
             const  coeff = gamma[j] / sumGammas;
@@ -35,7 +36,6 @@ export function maximization(clusters: IClusterModel[], data: IDataset):ICluster
                     if (b !== a) sigma[b][a] += tmp;
                 }
             }
-
         });
         const newCluster: IClusterModel = { pi, mu, sigma, vectorSpaceDim, label, gamma };
         return newCluster;
