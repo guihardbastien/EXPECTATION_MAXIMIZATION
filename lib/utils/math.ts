@@ -240,7 +240,6 @@ export function identityMat(dim:number): number[][] {
  * @returns number
  */
 export function matrixDeterminant(matrix:number[][]):number {
-    // TODO check if matrix is squared
     if (matrix[0].length !== matrix.length) {
         MATRIX_SIZE_ERROR;
     }

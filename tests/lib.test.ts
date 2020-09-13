@@ -8,7 +8,7 @@ describe('Library#index', () => {
     it('should return squared number', () => {
         const dataset: IDataset = {
             'points': [
-                [1,1],
+                [1.1,1],
                 [1,2],
                 [2,2],
                 [2,1],

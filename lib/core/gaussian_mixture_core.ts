@@ -12,8 +12,9 @@ export function density(cluster: IClusterModel, point:number[]): number {
         return coord - cluster.mu[index];
     });
     const invSigma = inverseMatrix(cluster.sigma);
-    const leftPart = 1 / (Math.pow(Math.sqrt(2 * Math.PI), point.length)
-            * Math.sqrt(matrixDeterminant(cluster.sigma)));
+
+    const determinant = Math.abs(matrixDeterminant(cluster.sigma));
+    const leftPart = 1 / (Math.pow(Math.sqrt(2 * Math.PI), point.length) * Math.sqrt(determinant));
     let rightPart =  0;
     for (let i = 0; i < cluster.vectorSpaceDim ; i += 1) {
         let sum = 0;
@@ -22,7 +23,8 @@ export function density(cluster: IClusterModel, point:number[]): number {
         }
         rightPart += delta[i] * sum;
     }
-    return leftPart * Math.exp(rightPart / -2);
+    const density = leftPart * Math.exp(rightPart / -2);
+    return density;
 }
 
 /**
