@@ -1,9 +1,15 @@
 {
-	"name": "@guihardbastien/expmax",
+	"name": "@guihardbastien/expectation-maximization",
 	"version": "0.1.0",
-	"description": "Machine learning library",
+	"description": "Clustering library",
 	"keywords": [
-		"lib"
+		"clustering",
+        "gaussian",
+        "gaussian mixture",
+        "em",
+        "expectation maximization",
+        "expmax",
+        "learning"
 	],
 	"author": "Bastien GUIHARD",
 	"license": "MIT",
