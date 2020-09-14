@@ -51,41 +51,6 @@ export interface IDataset{
 }
 
 /**
- * Fixme for later FP porting
- */
-export interface IExpmaxState{
-    /**
-     * Dataset
-     */
-    readonly dataset: IDataset;
-
-    /**
-     * Number of clusters we want
-     */
-    readonly clusterQt: number;
-
-    /**
-     * Vector space dimension
-     */
-    readonly vectorSpaceDim: number;
-
-    /**
-     * Clusters
-     */
-    readonly clusters?: IClusterModel[];
-
-    /**
-     * Threshold
-     */
-    readonly epsilon?:number;
-
-    /**
-     * Maximum iteration
-     */
-    readonly maxEpochs?: number;
-}
-
-/**
  * Class options
  */
 export interface IEmOptions{

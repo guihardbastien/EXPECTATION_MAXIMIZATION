@@ -11,7 +11,25 @@ import * as Core from '../core/expmax_core';
  * For instance:
  *
  * ```ts
- * tba
+ *  const dataset: IDataset = {
+ *       'points': [
+ *           [1.1,1],
+ *           [1,2],
+ *           [2,2],
+ *           [2,1],
+ *           [15,15],
+ *           [15,16],
+ *        ],
+ *       'label':'test',
+ *   };
+ *   const opts: IEmOptions = {
+ *       'clusterQt':2,
+ *       'maxEpochs':1000,
+ *       'threshold': 2e-16
+ *   }
+ *   const test = new ExpMax(dataset, opts);
+ *   const chose = test.train()
+ *   console.log(chose);
  * ```
  *
  * This program will output the likelihood of your data point belonging to each
@@ -63,12 +81,9 @@ export default class ExpMax {
      * @returns IClusterModel[] | error
      */
     update(newDataset:IDataset) {
-        if (MathUtils.checkMatrixSize(newDataset.points, this._dataset.points[0].length)) {
-            this._dataset = newDataset;
-            this.train();
-            return this._clusters;
-        }
-        MATRIX_SIZE_ERROR;
+        this._dataset = newDataset;
+        this.train();
+        return this._clusters;
     }
 
     /**

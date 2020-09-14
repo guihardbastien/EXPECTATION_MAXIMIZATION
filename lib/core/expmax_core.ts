@@ -3,12 +3,9 @@ import { probability } from './gaussian_mixture_core';
 import {
     randomVector,
     randomMatrix,
-    sumMatrix,
-    multiplyMatrices,
     transpose,
-    getMuNumerators,
     infinityNorm,
-    subMatrix, 
+    subMatrix,
     zeroMatrix} from '../utils/math';
 
 /**
@@ -24,13 +21,14 @@ export function maximization(clusters: IClusterModel[], data: IDataset):ICluster
         const { vectorSpaceDim, label, gamma } = cluster;
         const sumGammas = gamma.reduce((acc: number, val:number) => acc + val);
         const pi = sumGammas / n;
-        //const mu = getMuNumerators(gamma, data.points).map((val:number) => val / sumGammas);
 
-        const coeff = transpose(data.points).map((arr: number[]) => arr.map((val: number) => val / sumGammas ))
-        const mu = coeff.map((arr:number[]) => arr.reduce((acc:number, val:number, index:number) => (val * gamma[index]) + acc ));
-        
+        const coeff = transpose(data.points)
+            .map((arr: number[]) => arr.map((val: number) => val / sumGammas));
+        const mu = coeff
+            .map((arr:number[]) => arr
+                .reduce((acc:number, val:number, index:number) => (val * gamma[index]) + acc));
 
-        const sigma: number[][] = zeroMatrix(vectorSpaceDim,vectorSpaceDim);
+        const sigma: number[][] = zeroMatrix(vectorSpaceDim, vectorSpaceDim);
         data.points.forEach((point: number[], j:number) => {
             const diff: number[] = point.map((val:number, k:number) => val - mu[k]);
             const  coeff = gamma[j] / sumGammas;

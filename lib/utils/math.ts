@@ -6,26 +6,16 @@ import { MATRIX_SIZE_ERROR } from '../errors';
  * @param matDim: number
  * @returns number[][]
  */
-export function zeroMatrix(vectorDim: number, matDim: number): number[][]{
+export function zeroMatrix(vectorDim: number, matDim: number): number[][] {
     const zeroMat: number[][] = [];
-    for (var i = 0; i < matDim ; i+=1) {
+    for (let i = 0; i < matDim ; i += 1) {
         zeroMat.push([]);
-        for (var j = 0 ; j < vectorDim ; j+=1) {
+        for (let j = 0 ; j < vectorDim ; j += 1) {
             zeroMat[i].push(0);
-            
+
         }
     }
     return zeroMat;
-}
-
-/**
- * Checks if a matrix has the correct dim
- * @param matrix: number[][]
- * @param vectorSpaceDim: number
- * @return boolean|error
- */
-export function checkMatrixSize(matrix: number[][], vectorSpaceDim: number):boolean {
-    return true;
 }
 
 /**
@@ -67,24 +57,9 @@ export function sumMatrix(mats: number[][]):number {
 }
 
 /**
- * Helper to get the mu numerators
- * @param mat1: number[][]
- * @param mat2[][]
- * @returns number[] has same vector space dimension (it's the centroid)
- */
-export function getMuNumerators(gamma:number[], points:number[][]): number[] {
-    const c: number[] = [];
-    for (let i = 0, len = points.length; i < len; i += 1) {
-        for (let j = 0, len = points[i].length; j < len; j += 1) {
-            const mul = gamma[i] * points[i][j];
-            isNaN(c[i]) ? c[i] = mul : c[i] += mul;
-        }
-    }
-    return c;
-}
-
-/**
  * Matrice transposition
+ * @param matrix:number[][]
+ * @returns number[][]
  */
 export function transpose(matrix: number[][]):number[][] {
     if (matrix[0].length === 0 || matrix.length === 0) {
@@ -107,7 +82,7 @@ export function transpose(matrix: number[][]):number[][] {
  * @param matrix2:number[][]
  * @returns number[][]
  */
-export  function multiplyMatrices(matrix1: number[][], matrix2:number[][]): number[][] {
+export function multiplyMatrices(matrix1: number[][], matrix2:number[][]): number[][] {
     const matrix: number[][] = [];
     for (let i = 0; i < matrix1.length; i += 1) {
         matrix[i] = [];
@@ -184,7 +159,7 @@ export function inverseMatrix(matrix: number[][]):number[][] {
                 v0 = k;
             }
         }
-        aj = a[i0]; 
+        aj = a[i0];
         a[i0] = a[j];
         a[j] = aj;
         idJ = id[i0];
