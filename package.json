@@ -1,5 +1,5 @@
 {
-	"name": "@guihardbastien/expectation-maximization",
+	"name": "expmax",
 	"version": "0.1.0",
 	"description": "Clustering library",
 	"keywords": [
