@@ -31,7 +31,7 @@ npm install expmax
 __Example:__
 
 ```typescript
-import expmax from 'expmax';
+import {ExpMax} from 'expmax';
 
 // Dataset should have data points with same vector space dimension
 const dataset: IDataset = {

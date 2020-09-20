@@ -18,12 +18,12 @@
 	"types": "dist/types/index.d.ts",
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/guihardbastien/REPO.git"
+		"url": "git+https://github.com/guihardbastien/EXPECTATION_MAXIMIZATION"
 	},
 	"bugs": {
-		"url": "https://github.com/guihardbastien/REPO/issues"
+		"url": "https://github.com/guihardbastien/EXPECTATION_MAXIMIZATION/issues"
 	},
-	"homepage": "https://github.com/guihardbastien/REPO#readme",
+	"homepage": "https://github.com/guihardbastien/EXPECTATION_MAXIMIZATION#readme",
 	"engines": {
 		"node": ">=8.9.0"
 	},

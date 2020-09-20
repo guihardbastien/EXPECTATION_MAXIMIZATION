@@ -2,8 +2,8 @@ import { MATRIX_SIZE_ERROR } from '../errors';
 
 /**
  * Creates a zero matrix
- * @param vectorDim: number
- * @param matDim: number
+ * @param vectorDim: number = cols
+ * @param matDim: number = rows
  * @returns number[][]
  */
 export function zeroMatrix(vectorDim: number, matDim: number): number[][] {
@@ -12,7 +12,6 @@ export function zeroMatrix(vectorDim: number, matDim: number): number[][] {
         zeroMat.push([]);
         for (let j = 0 ; j < vectorDim ; j += 1) {
             zeroMat[i].push(0);
-
         }
     }
     return zeroMat;
@@ -53,7 +52,6 @@ export function randomMatrix(matDim:number, vecDim: number) {
 export function sumMatrix(mats: number[][]):number {
     const sum = (acc:number, val:number) => { return acc + val; };
     return mats.map(mat => mat.reduce(sum)).reduce(sum);
-
 }
 
 /**
