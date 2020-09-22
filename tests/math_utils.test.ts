@@ -1,5 +1,6 @@
 import * as MathUtils from '../lib/utils/math';
 import * as Chai from 'chai';
+import {MATRIX_SIZE_ERROR} from '../lib/errors';
 
 const should = Chai.should();
 
@@ -67,5 +68,71 @@ describe('MathUtils#multiplyMatrices', () => {
         const multiplyMats = MathUtils.multiplyMatrices(mat, mat);
         multiplyMats.should.eql([[7,10],[15,22]]);
     });
+    it('should not multiply matrices that cannot be multiplied', () => {
+        const mat = [[1,2],[3,4]];
+        const mat2 = [[1,2,3],[4,5,6]];
+        const multiplyMats = MathUtils.multiplyMatrices(mat, mat2);
+        multiplyMats.should.eql([]);
+    });
 });
-
+describe('MathUtils#infinityNorm', () => {
+    it('should find infinty norm of a matrix', () => {
+        const mat = [[1,2],[3,4]];
+        const normInf = MathUtils.infinityNorm(mat);
+        normInf.should.eql(7);
+    });
+});
+describe('MathUtils#subMatrix', () => {
+    it('should subtract two matrices', () => {
+        const mat = [[1,2],[3,4]];
+        const sub = MathUtils.subMatrix(mat, mat);
+        sub.should.eql([[0,0],[0,0]]);
+    });
+    it('should not substract matrices with different size', () => {
+        const mat = [[1,2],[3,4]];
+        const mat2 = [[1,2,3],[4,5,6]];
+        const sub = MathUtils.subMatrix(mat, mat2);
+        sub.should.eql([]);
+    });   
+});
+describe('MathUtils#inverseMatrix', () => {
+    it('should return correct matrix inverse', () => {
+        const mat = [[4,7],[2,6]];
+        const matInv = MathUtils.inverseMatrix(mat);
+        matInv.should.eql([
+            [ 0.6000000000000001, -0.7000000000000001 ], 
+            [ -0.2, 0.4 ] 
+        ]);
+    }); 
+});
+describe('MathUtils#identityMatrix', () => {
+    it('should return correct identity matrix', () => {
+        const matId = MathUtils.identityMat(3);
+        matId.should.eql([
+            [ 1, 0, 0 ], 
+            [ 0, 1, 0 ], 
+            [ 0, 0, 1 ] 
+        ]);
+    }); 
+});
+describe('MathUtils#matrixDeterminant', () => {
+    it('should return correct determinant', () => {
+        const matrix = [[1,2,3,15],
+                        [3,4,8,4],
+                        [8,5,6,12],
+                        [48,7,6,2]];
+        const det = MathUtils.matrixDeterminant(matrix);
+        det.should.eql(5689.999999999999);
+    });
+    it('should throw when matrix isn\'t square', () => {
+        const matrix = [[1],[3]];
+        ( () => {
+            const det = MathUtils.matrixDeterminant(matrix);
+        }).should.throw(MATRIX_SIZE_ERROR);
+    }); 
+    it('should return zero when vectors are on same line', () => {
+        const matrix = [[1,2],[1,2]];
+        const det = MathUtils.matrixDeterminant(matrix);
+        det.should.eql(0);
+    });
+});

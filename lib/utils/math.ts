@@ -81,6 +81,9 @@ export function transpose(matrix: number[][]):number[][] {
  * @returns number[][]
  */
 export function multiplyMatrices(matrix1: number[][], matrix2:number[][]): number[][] {
+    if (matrix1.length !== matrix2[0].length) {
+        return [];
+    }
     const matrix: number[][] = [];
     for (let i = 0; i < matrix1.length; i += 1) {
         matrix[i] = [];
@@ -117,6 +120,9 @@ export function infinityNorm(matrix: number[][]):number {
  * @returns number[][]
  */
 export function subMatrix(mat1: number[][], mat2:number[][]):number[][] {
+    if (mat1.length !== mat2.length || mat1[0].length !== mat2[0].length) {
+        return [];
+    }
     const mat = mat1.map((vec:number[], index:number) => {
         const vectorSub = [];
         for (let i = 0, len = vec.length; i < len; i += 1) {
@@ -214,7 +220,7 @@ export function identityMat(dim:number): number[][] {
  */
 export function matrixDeterminant(matrix:number[][]):number {
     if (matrix[0].length !== matrix.length) {
-        MATRIX_SIZE_ERROR;
+        throw MATRIX_SIZE_ERROR;
     }
     const n = matrix[0].length;
     let ret = 1;

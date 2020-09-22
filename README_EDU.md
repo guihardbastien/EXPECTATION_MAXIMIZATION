@@ -1,2 +1,4 @@
-# How does it work ? 
+# Expectation maximization from actual scratch
+*a typescript story*
+## How does it work ? 
 TBA
