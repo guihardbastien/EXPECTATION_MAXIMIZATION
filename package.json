@@ -36,7 +36,6 @@
 		"test:prod": "npm run lint && npm run test -- --no-cache",
 		"lint": "npx tslint --project tsconfig.json -t codeFrame 'lib/**/*.ts' 'test/**/*.ts'",
 		"docs": "npx typedoc --out docs --target es6 --theme minimal --mode file lib",
-        "make-badges": "node_modules/.bin/jest-badges-readme",
         "badges": "istanbul-badges-readme"
 	},
 	"dependencies": {
