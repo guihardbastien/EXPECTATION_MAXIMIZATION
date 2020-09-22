@@ -4,12 +4,12 @@
 	"description": "Clustering library",
 	"keywords": [
 		"clustering",
-        "gaussian",
-        "gaussian mixture",
-        "em",
-        "expectation maximization",
-        "expmax",
-        "learning"
+		"gaussian",
+		"gaussian mixture",
+		"em",
+		"expectation maximization",
+		"expmax",
+		"learning"
 	],
 	"author": "Bastien GUIHARD",
 	"license": "MIT",
@@ -36,7 +36,8 @@
 		"test:prod": "npm run lint && npm run test -- --no-cache",
 		"lint": "npx tslint --project tsconfig.json -t codeFrame 'lib/**/*.ts' 'test/**/*.ts'",
 		"docs": "npx typedoc --out docs --target es6 --theme minimal --mode file lib",
-		"make-badges": "node_modules/.bin/jest-badges-readme"
+        "make-badges": "node_modules/.bin/jest-badges-readme",
+        "badges": "istanbul-badges-readme"
 	},
 	"dependencies": {
 		"@types/node": "^11.13.20",
@@ -48,6 +49,7 @@
 		"@types/jest": "^23.3.14",
 		"@types/sinon": "^7.0.13",
 		"chai": "4.x",
+		"istanbul-badges-readme": "^1.0.5",
 		"jest": "^25.5.4",
 		"jest-config": "^25.5.4",
 		"lodash.camelcase": "^4.3.0",
@@ -88,6 +90,7 @@
 		},
 		"collectCoverageFrom": [
 			"lib/**/*.{js,ts}"
-		]
+		],
+        "coverageReporters": ["json-summary"]
 	}
 }
