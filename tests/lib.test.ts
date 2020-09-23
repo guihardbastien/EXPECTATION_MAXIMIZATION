@@ -1,5 +1,5 @@
 import * as Chai from 'chai';
-import {ExpMax} from '../lib';
+import {ExpMax, EmCore} from '../lib';
 
 const should = Chai.should();
 
@@ -32,6 +32,7 @@ const should = Chai.should();
 describe('Library#index', () => {
     it("should export what's needed", () => {
         should.exist(ExpMax); 
+        should.exist(EmCore);
     });
 /*    it('should return squared number', () => {
        const dataset = {
