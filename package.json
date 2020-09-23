@@ -1,6 +1,6 @@
 {
 	"name": "expmax",
-	"version": "0.2.2",
+	"version": "0.2.3",
 	"description": "Expectation maximization using multivariate gaussian distribution library - clustering lib",
 	"keywords": [
 		"clustering",
