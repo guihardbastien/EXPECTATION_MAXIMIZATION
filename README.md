@@ -1,7 +1,7 @@
 # Expmax
 | Statements                | Branches                | Functions                |
 | ------------------------- | ----------------------- | ------------------------ |
-| ![Statements](https://img.shields.io/badge/Coverage-97.32%25-brightgreen.svg) | ![Branches](https://img.shields.io/badge/Coverage-81.08%25-yellow.svg) | ![Functions](https://img.shields.io/badge/Coverage-95.45%25-brightgreen.svg) |
+| ![Statements](https://img.shields.io/badge/Coverage-96.59%25-brightgreen.svg) | ![Branches](https://img.shields.io/badge/Coverage-79.49%25-red.svg) | ![Functions](https://img.shields.io/badge/Coverage-93.33%25-brightgreen.svg) |
 ## Description
 
 Expmax is an expectation maximization (EM) library. It makes use of a gaussian mixture model.

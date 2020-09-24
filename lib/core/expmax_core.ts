@@ -62,15 +62,15 @@ export function expectation(clusters: IClusterModel[], data: IDataset): ICluster
             return prob;
         });
         const gamma: number[] = [];
-        //if (denominator > 0) {
+        if (denominator > 0) {
             numerators.forEach((n:any, i:number) => {
                 gamma[i] = n / denominator;
             });
-        //} else {
-        //    numerators.forEach((n:any, i:number) => {
-        //        gamma[i] = 1 / clusters.length;
-        //    });
-        //}
+        } else {
+            numerators.forEach((n:any, i:number) => {
+                gamma[i] = 1 / clusters.length;
+            });
+        }
         return gamma;
     });
     const updatedClusters = clusters.map((c: IClusterModel, index:number) => {
